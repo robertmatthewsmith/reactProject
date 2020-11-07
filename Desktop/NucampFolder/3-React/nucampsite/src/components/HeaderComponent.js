@@ -17,6 +17,10 @@ import {
   Label,
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
+import { Fade, Loop} from 'react-animation-components';
+
+
+
 
 class Header extends Component {
   constructor(props) {
@@ -59,8 +63,14 @@ class Header extends Component {
           <div className="container">
             <div className="row">
               <div className="col">
+              <Fade in enterOpacity={0.99} >
                 <h1>Nucamp</h1>
+                </Fade>
+                <Loop in iterations={10}>
+                <Fade  in enterOpacity={0.99}>
                 <h2>a better way to camp</h2>
+                </Fade>
+                </Loop>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 
-
+ add .className
 
 class FeaturedDirectory extends Component {
   constructor(props) {

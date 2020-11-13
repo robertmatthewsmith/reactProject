@@ -1,5 +1,5 @@
-import * as ActionTypes from "./ActionTypes";
-import { baseUrl } from '../shared/baseUrl';
+import * as ActionTypes from './ActionTypes';
+import { baseUrl } from '../shared/baseUrl';;
 
 
 
@@ -113,7 +113,8 @@ export const postComment = (campsiteId, rating, author, text) => dispatch => {
 };
 
 
-export const fetchPromotions = () => dispatch => {
+export const fetchPromotions = () => (dispatch) => {
+    
   dispatch(promotionsLoading());
 
   return fetch(baseUrl + 'promotions')
@@ -135,6 +136,7 @@ export const fetchPromotions = () => dispatch => {
       .then(promotions => dispatch(addPromotions(promotions)))
       .catch(error => dispatch(promotionsFailed(error.message)));
 };
+
 export const promotionsLoading = () => ({
   type: ActionTypes.PROMOTIONS_LOADING
 });
@@ -149,27 +151,26 @@ export const addPromotions = promotions => ({
   payload: promotions
 });
 
-export const fetchPartners = () => dispatch => {
-
+export const fetchPartners = () => (dispatch) => {
+  
   dispatch(partnersLoading());
 
   return fetch(baseUrl + 'partners')
-  .then(response => {
-    if (response.ok) {
-      return response;
-    }else {
-      const error = new Error(`Error ${response.status}: ${response.statusText}`);
-      error.response = response;
-      throw error;
-    }
-
-    },
-    error => {
-      const errMess = new Error(error.message);
-      throw errMess;
-  }
-  )
-  .then(response => response.json())
+      .then(response => {
+              if (response.ok) {
+                  return response;
+              } else {
+                  const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                  error.response = response;
+                  throw error;
+              }
+          },
+          error => {
+              const errMess = new Error(error.message);
+              throw errMess;
+          }
+      )
+      .then(response => response.json())
       .then(partners => dispatch(addPartners(partners)))
       .catch(error => dispatch(partnersFailed(error.message)));
 };

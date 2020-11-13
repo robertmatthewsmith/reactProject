@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
-import { Loading} from './LoadingComponent';
-import { Fade, Stagger} from 'react-animation-components';
+import { Fade, Stagger } from 'react-animation-components';
+import  { Loading }  from './LoadingComponent';
+
 
 function RenderPartner ({partner}) {
     if(partner) {
@@ -20,38 +22,35 @@ function RenderPartner ({partner}) {
     return <div />
 }
 
-function PartnerList(props) {
+function PartnerList (props) {
     const partners = props.partners.partners.map(partner => {
         return (
             <Fade in key={partner.id}>
-                <Media tag="li" key={partner.id} >
-                    <RenderPartner partner={partner} />
-                 </Media>
+                <Media tag="li">
+                        <RenderPartner partner={partner} />
+                </Media>
             </Fade>
-           
         );
     });
-    if (partners.isLoading) {
-        return <Loading />;
+    if (props.partners.isLoading)  {
+        return <Loading />
     }
-    if (partners.errMess) {
-        return(
-            <div className="col">
-                <h4>{partners.errMess}</h4>
-            </div>
+    if (props.partners.errMess) {
+        return (
+        <div className="col">
+            <h4>{partners.errMess}</h4>
+        </div>
         )
     }
     return (
         <div className="col mt-4">
             <Media list>
-            <Stagger in>
-                {partners}
-            </Stagger>
+                <Stagger in key={partners}>
+                    {partners}
+                </Stagger>
             </Media>
         </div>
     );
-        
-    
 }
 
 
@@ -114,5 +113,6 @@ function About(props) {
         </div>
     );
 }
+
 
 export default About;
